@@ -1,0 +1,1 @@
+<?php$lang['required'] = "Pole %s jest wymagane.";$lang['isset'] = "Pole %s musi mieć wartość.";/* End of file form_validaation_lang.php *//* Location: ./system/language/polish/form_validation_lang.php */

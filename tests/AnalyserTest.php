@@ -58,6 +58,23 @@ final class AnalyserTest extends TestCase
         $this->assertSame(91.5, $measurements->getNonCommentLinesRelative());
     }
 
+    public function testCrLineEndings(): void
+    {
+        $path = __DIR__ . '/Fixture/cr_line_endings.php';
+
+        // make sure that the fixture wasn't accidentally
+        // auto-formatted to normal line endings
+        $content = file_get_contents($path);
+        $this->assertNotFalse($content);
+        $this->assertStringNotContainsString("\n", $content);
+
+        $measurements = $this->analyser->measureFiles([$path]);
+
+        $this->assertSame(9, $measurements->getLines());
+        $this->assertSame(7, $measurements->getNonCommentLines());
+        $this->assertSame(2, $measurements->getCommentLines());
+    }
+
     public function testSkipAnonymousClass(): void
     {
         $measurements = $this->analyser->measureFiles([__DIR__ . '/Fixture/issue_138.php']);
